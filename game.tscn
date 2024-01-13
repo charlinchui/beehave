@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c44iilydj3hn5"]
+
+[ext_resource type="Script" path="res://BasicUnit.cs" id="1_83n7a"]
+[ext_resource type="Script" path="res://Game.cs" id="1_ifafw"]
+[ext_resource type="Texture2D" uid="uid://bjkwdgbkrixda" path="res://Sprites/abejitaretrasada.png" id="2_bjqt7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfoma"]
+size = Vector2(38, 32)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_vr2hb"]
+vertices = PackedVector2Array(-14493, -1725, 28292, -1861, 28360, 26549, -14493, 26516)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-14493, -1725, 28292, -1861, 28360, 26549, -14493, 26516)])
+
+[node name="Game" type="Node2D"]
+position = Vector2(18, 1)
+script = ExtResource("1_ifafw")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(600, 400)
+scale = Vector2(5, 5)
+script = ExtResource("1_83n7a")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_bjqt7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-1, 2.08165e-12)
+shape = SubResource("RectangleShape2D_tfoma")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+avoidance_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_vr2hb")
